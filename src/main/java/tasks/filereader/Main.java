@@ -1,3 +1,4 @@
+package tasks.filereader;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,13 +17,10 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.ByteBuffer;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.BufferedOutputStream;
-import java.io.BufferedInputStream;
 import java.io.FileNotFoundException;
 import java.nio.channels.FileLock;
-import java.nio.channels.FileLockInterruptionException;
 import java.nio.channels.OverlappingFileLockException;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
@@ -30,14 +28,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Map.Entry;
 import java.util.Iterator;
-import java.util.SortedSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
 
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +43,7 @@ import static java.nio.file.Files.*;
         Если нужно считать информация с больших файлов, то отлично подойдет BufferedReader */
 
 public class Main {
-    //Подготавливаем метод Main, чтобы не заморачиваться с обработкой исключений пропишем IOException
+    //Подготавливаем метод tasks.filereader.NumberTask, чтобы не заморачиваться с обработкой исключений пропишем IOException
     public static void main(String[] args) throws IOException{
         String FILENAME1 = "C:\\git\\Alexsabrepo\\java_class\\IO.files\\input.txt";
         String filenameIn = "C:/git/Alexsabrepo/java_class/IO.files/input.txt";
@@ -59,7 +52,7 @@ public class Main {
         String fileNameOut = "C:/git/Alexsabrepo/java_class/IO.files/output.txt";
         exists(filenameIn);
         exists(fileNameOut);
-
+        FileProcessor fileProcessor = new FileScannerReader();
      // Reading from a input file
 
         //readUsingFileReader(filename2);
@@ -72,12 +65,13 @@ public class Main {
         //readUsingFiles(filename2);  - does not work
         //System.out.println(Java78FileReadingExample(filename2)) - does not work;
 
+        FileBufferedReader.readUsingFileReader("");
 
         System.out.println("Staring  by reading created File in Java");
         System.out.println("+++++++++ Start +++++++++++++++");
 
         String TextintheFile=StreamUsingBufferedReader(filenameIn);
-        //String TextintheFile= ReadFile.usingFileReader(filenameIn);
+        //String TextintheFile= tasks.filereader.ReadFile.usingFileReader(filenameIn);
         System.out.println(TextintheFile);
 
         System.out.println("+++++++++++ End +++++++++++++++");
@@ -223,24 +217,7 @@ public class Main {
 
     }
 
-    //Используем класс Files для обработки небольших файлов, получаем содержимое файла файла
-    private static void readUsingFileReader(String fileName) throws IOException {
 
-        File file = new File(fileName);
-        //создаем объект FileReader для объекта File
-        FileReader fr = new FileReader(file);
-        //создаем BufferedReader с существующего FileReader для построчного считывания
-        BufferedReader br = new BufferedReader(fr);
-        // считаем сначала первую строку
-        String line;
-        while((line = br.readLine()) != null){
-            //обрабатываем считанную строку - пишем ее в консоль
-            System.out.println(line);
-        }
-        br.close();
-        fr.close();
-
-    }
 
 
 
